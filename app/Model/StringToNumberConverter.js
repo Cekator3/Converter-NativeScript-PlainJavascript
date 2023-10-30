@@ -25,7 +25,7 @@ function trimNotDigitsSymbols(str)
         start++;
     while ((!isDigit(str[end])) && (start < end))
         end--;
-    if (start < end)
+    if (start >= end)
         return '';
     return str.substring(start, end + 1);
 }
@@ -110,8 +110,9 @@ export function convertStringToNumber(str)
 {
     let temp = trimNotDigitsSymbols(str);
     if (temp === '')
-        throw new TooManyDecimalDelimitersInNumberFoundException(str, str.length);
+        return 0;
     str = temp;
     EnsureCanBeConvertedToNumber(str);
-    return +str;
+    console.log(str);
+    return parseFloat(str);
 }
