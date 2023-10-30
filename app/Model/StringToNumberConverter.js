@@ -2,7 +2,7 @@
  * @file A subsystem for converting a string to number
  */
 
-function isDigitDelimiter(chr)
+function isDecimalDelimiter(chr)
 {
     return (chr === '.') || (chr === ',');
 }
@@ -15,30 +15,6 @@ function isDigit(chr)
 function isExponent(chr)
 {
     return (chr === 'e') || (chr === 'E');
-}
-
-function isPartOfDigit(chr)
-{
-    return isDigitDelimiter(chr) || isDigit(chr) || isExponent(chr);
-}
-
-function countDecimalDelimiters(str)
-{
-    let result = 0;
-    for (let chr of str)
-        if (isDigitDelimiter(chr))
-            result++;
-    return result;
-}
-
-function countExponents(str)
-{
-
-    let result = 0;
-    for (let chr of str)
-        if (isExponent(chr))
-            result++;
-    return result;
 }
 
 function trimNotDigitsSymbols(str)
@@ -92,10 +68,41 @@ export class TooManyExponentsInNumberFoundException extends Error
     }
 }
 
+function EnsureCanBeConvertedToNumber(str)
+{
+    let amountOfDecimalDelimiters = 0;
+    let amountOfExponents = 0;
+    for (let i = 0; i < str.length; i++)
+    {
+        if (isDecimalDelimiter(str[i]))
+        {
+            amountOfDecimalDelimiters++;
+            if (amountOfDecimalDelimiters > 1)
+                break;
+            continue;
+        }
+        if (isExponent(str[i]))
+        {
+            amountOfExponents++;
+            if (amountOfExponents > 1)
+                break;
+            continue;
+        }
+        if (isDigit(str[i]))
+            continue;
+        throw new FoundNotDigitSymbolException(str, str[i], i + 1);
+    }
+    if (amountOfDecimalDelimiters > 1)
+        throw new TooManyDecimalDelimitersInNumberFoundException(str, amountOfDecimalDelimiters);
+    if (amountOfExponents > 1)
+        throw new TooManyExponentsInNumberFoundException(str, amountOfExponents);
+}
+
 /**
  * Converts string to number
- * @throws FoundNotDigitSymbolException
- * @throws TooManyDecimalDelimitersInNumberFoundException
+ * @throws {FoundNotDigitSymbolException}
+ * @throws {TooManyDecimalDelimitersInNumberFoundException}
+ * @throws {TooManyExponentsInNumberFoundException}
  * @param {string} str
  * @returns {number}
  */
@@ -105,14 +112,6 @@ export function convertStringToNumber(str)
     if (temp === '')
         throw new TooManyDecimalDelimitersInNumberFoundException(str, str.length);
     str = temp;
-    for (let i = 0; i < str.length; i++)
-        if ((!isDigit(str[i])) && (!isDigitDelimiter(str[i])))
-            throw new FoundNotDigitSymbolException(str, str[i], i + 1);
-    let amountOfDecimalDelimiters = countDecimalDelimiters(str);
-    if (amountOfDecimalDelimiters > 1)
-        throw new TooManyDecimalDelimitersInNumberFoundException(str, amountOfDecimalDelimiters);
-    let amountOfExponents = countExponents(str);
-    if (amountOfExponents > 1)
-        throw new TooManyExponentsInNumberFoundException(str, amountOfExponents);
+    EnsureCanBeConvertedToNumber(str);
     return +str;
 }
