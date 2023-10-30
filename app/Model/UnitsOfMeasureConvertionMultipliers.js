@@ -5,10 +5,11 @@
 let unitsOfMeasureConvertionMultipliers = new Map();
 
 /**
- * Returns multiplier for converting a value from one unit of measure to another
+ * Returns multiplier for converting a value from one unit of measure to another.
+ * If convertation not implemented then returns undefined.
  * @param {string} currentUnitOfMeasure
  * @param {string} targetUnitOfMeasure
- * @returns {number}
+ * @returns {number|undefined}
  */
 export
 function getMultiplierForConvertingValueFromOneUnitOfMeasureToAnother(currentUnitOfMeasure,
