@@ -1,9 +1,6 @@
 import
 {
-    convertStringToNumber,
-    TooManyExponentsInNumberFoundException,
-    TooManyDecimalDelimitersInNumberFoundException,
-    FoundNotDigitSymbolException
+    convertStringToNumber
 } from "~/Model/StringToNumberConverter";
 
 describe('Correct numbers converting test', testCorrectNumbersConverting);
