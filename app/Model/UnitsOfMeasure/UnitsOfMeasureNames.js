@@ -4,6 +4,7 @@
 
 import
 {
+    UNIT_OF_MEASURE_CNAME_ACRE,
     UNIT_OF_MEASURE_CNAME_ANGLE_MINUTE, UNIT_OF_MEASURE_CNAME_ANGLE_SECOND,
     UNIT_OF_MEASURE_CNAME_ANGSTROM,
     UNIT_OF_MEASURE_CNAME_ASTRONOMICAL_UNIT, UNIT_OF_MEASURE_CNAME_BAR,
@@ -134,7 +135,6 @@ function addRuNamesForLengthUnitsOfMeasure()
 
 function addRuNamesForAreaUnitsOfMeasure()
 {
-
     ruNames.set(UNIT_OF_MEASURE_CNAME_SQUARE_MILE, 'Квадратных миль');
     ruNames.set(UNIT_OF_MEASURE_CNAME_SQUARE_KILOMETER, 'Квадартных километров');
     ruNames.set(UNIT_OF_MEASURE_CNAME_HECTARE, 'Гектаров');

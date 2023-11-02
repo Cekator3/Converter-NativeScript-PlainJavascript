@@ -1,0 +1,16 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="{{ title }}">
+        <ActionItem icon="font://&#xf060;" class="fas" tap="{{ goBack }}" />
+        <Label text="{{ title }}" />
+    </ActionBar>
+
+    <StackLayout>
+        <FlexboxLayout class="unitsOfMeasure">
+        </FlexboxLayout>
+
+        <Button ontap="swapUnits" />
+
+        <FlexboxLayout class="numpad">
+        </FlexboxLayout>
+    </StackLayout>
+</Page>
