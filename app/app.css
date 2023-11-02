@@ -1,6 +1,14 @@
-﻿@import '@nativescript/theme/css/core.css';
-@import '@nativescript/theme/css/default.css';
+﻿@import '../node_modules/@nativescript/theme/css/core.css';
+@import '../node_modules/@nativescript/theme/css/default.css';
 
-Button.-primary {
-  font-size: 18;
+.far {
+    font-family: Font Awesome 6 Free, fa-regular-400;
+}
+
+.fab {
+    font-family: Font Awesome 6 Brands, fa-brands-400;
+}
+
+.fas {
+    font-family: Font Awesome 6 Free, fa-solid-900;
 }

@@ -113,6 +113,5 @@ export function convertStringToNumber(str)
         return 0;
     str = temp;
     EnsureCanBeConvertedToNumber(str);
-    console.log(str);
     return parseFloat(str);
 }
