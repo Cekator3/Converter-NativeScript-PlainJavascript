@@ -5,6 +5,15 @@
 let inputsOfNumberGenerator = '';
 
 /**
+ * Returns entered to generator elements
+ * @return {string}
+ */
+export function getRawInput()
+{
+    return inputsOfNumberGenerator;
+}
+
+/**
  * Returns number generated from entered to generator elements
  * @return {number}
  */

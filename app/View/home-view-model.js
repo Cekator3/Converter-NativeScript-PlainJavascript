@@ -81,6 +81,7 @@ function openConvertationForWeightUnitsOfMeasure()
 
 export function createViewModel()
 {
+    //TODO items from listpicker
     viewModel.openConvertationForLengthUnitsOfMeasure = openConvertationForLengthUnitsOfMeasure;
     viewModel.openConvertationForAreaUnitsOfMeasure = openConvertationForAreaUnitsOfMeasure;
     viewModel.openConvertationForVolumeUnitsOfMeasure = openConvertationForVolumeUnitsOfMeasure;
