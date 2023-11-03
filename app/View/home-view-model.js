@@ -8,16 +8,16 @@ import {
     getIdentifiersOfStorageUnitsOfMeasure, getIdentifiersOfTimeUnitsOfMeasure,
     getIdentifiersOfVolumeUnitsOfMeasure, getIdentifiersOfWeightUnitsOfMeasure
 } from "~/Model/UnitsOfMeasure/IdentifiersOfUnitsOfMeasureFromCertainGroup";
+import {ListPickerSetElements} from "~/Model/UnitsOfMeasure/UnitOfMeasureConvertation/ListPicker";
 
 const viewModel = new Observable();
 const CONVERTATION_PAGE_PATH = '/View/UnitOfMeasureConvertation/convertation';
 
-function navigateToConvertationPage(unitsOfMeasureIdentifiers, conversationTitle)
+function navigateToConvertationPage(conversationTitle)
 {
     Frame.topmost().navigate({
         moduleName: CONVERTATION_PAGE_PATH,
         context: {
-            unitsOfMeasureIdentifiers: unitsOfMeasureIdentifiers,
             conversationTitle: conversationTitle
         }
     })
@@ -26,49 +26,57 @@ function navigateToConvertationPage(unitsOfMeasureIdentifiers, conversationTitle
 function openConvertationForLengthUnitsOfMeasure()
 {
     let ids = getIdentifiersOfLengthUnitsOfMeasure();
-    navigateToConvertationPage(ids, 'Длина');
+    ListPickerSetElements(ids);
+    navigateToConvertationPage('Длина');
 }
 
 function openConvertationForAreaUnitsOfMeasure()
 {
     let ids = getIdentifiersOfAreaUnitsOfMeasure();
-    navigateToConvertationPage(ids, 'Площадь');
+    ListPickerSetElements(ids);
+    navigateToConvertationPage('Площадь');
 }
 
 function openConvertationForVolumeUnitsOfMeasure()
 {
     let ids = getIdentifiersOfVolumeUnitsOfMeasure();
-    navigateToConvertationPage(ids, 'Объём');
+    ListPickerSetElements(ids);
+    navigateToConvertationPage('Объём');
 }
 
 function openConvertationForAngleUnitsOfMeasure()
 {
     let ids = getIdentifiersOfAngleUnitsOfMeasure();
-    navigateToConvertationPage(ids, 'Углы');
+    ListPickerSetElements(ids);
+    navigateToConvertationPage('Углы');
 }
 
 function openConvertationForStorageUnitsOfMeasure()
 {
     let ids = getIdentifiersOfStorageUnitsOfMeasure();
-    navigateToConvertationPage(ids, 'Информация');
+    ListPickerSetElements(ids);
+    navigateToConvertationPage('Информация');
 }
 
 function openConvertationForPressureUnitsOfMeasure()
 {
     let ids = getIdentifiersOfPressureUnitsOfMeasure();
-    navigateToConvertationPage(ids, 'Давление');
+    ListPickerSetElements(ids);
+    navigateToConvertationPage('Давление');
 }
 
 function openConvertationForTimeUnitsOfMeasure()
 {
     let ids = getIdentifiersOfTimeUnitsOfMeasure();
-    navigateToConvertationPage(ids, 'Время');
+    ListPickerSetElements(ids);
+    navigateToConvertationPage('Время');
 }
 
 function openConvertationForWeightUnitsOfMeasure()
 {
     let ids = getIdentifiersOfWeightUnitsOfMeasure();
-    navigateToConvertationPage(ids, 'Вес');
+    ListPickerSetElements(ids);
+    navigateToConvertationPage('Вес');
 }
 
 export function createViewModel()

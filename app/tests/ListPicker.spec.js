@@ -1,12 +1,12 @@
 import
 {
     ListPickerSetElements,
-    ListPickerSetSelectedElement,
-    ListPickerGetSelectedElement,
+    ListPickerSetFirstSelectedElement,
+    ListPickerGetFirstSelectedElement,
     ListPickerGetNonSelectedElements,
-    ListPickerGetAllElements
+    ListPickerGetAllElements, ListPickerSetSecondSelectedElement
 }
-from "~/Model/ListPicker";
+    from "~/Model/UnitsOfMeasure/UnitOfMeasureConvertation/ListPicker";
 
 describe('ListPicker stores all given elements.', testListPickerStoresAllGivenElements);
 describe('ListPicker stores only unique items.', testListPickerStoresOnlyUniqueItems);
@@ -38,7 +38,8 @@ function testListPickerReturnsNonSelectedItemsCorrectly()
     it('Selected item from list ' + list + ' must be ' + selectedItem, function ()
     {
         ListPickerSetElements(list);
-        ListPickerSetSelectedElement(selectedItem);
-        expect(ListPickerGetNonSelectedElements()).toEqual(list.slice(0, -1));
+        ListPickerSetFirstSelectedElement(selectedItem);
+        ListPickerSetSecondSelectedElement(list[0]);
+        expect(ListPickerGetNonSelectedElements()).toEqual(list.slice(1, -1));
     });
 }

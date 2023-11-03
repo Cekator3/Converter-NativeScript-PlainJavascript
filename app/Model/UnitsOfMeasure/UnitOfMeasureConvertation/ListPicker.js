@@ -1,9 +1,10 @@
 /**
- * @file A subsystem for storing a list of unique items and its selected item
+ * @file A subsystem for storing a list of unique items and selecting two items from it.
  */
 
 let set = undefined;
-let selectedElement = undefined;
+let firstSelectedElement = undefined;
+let secondSelectedElement = undefined;
 
 export class ListPickerNotInitiliasedException extends Error {}
 export class ListPickerGivenNonUniqueItems extends Error
@@ -34,33 +35,59 @@ export class ElementIsNotInListPickerException extends Error
  */
 export function ListPickerSetElements(elementsIdentifiers)
 {
+    if (elementsIdentifiers.length === 0)
+        return;
     set = new Set(elementsIdentifiers);
     if (set.size !== elementsIdentifiers.length)
         throw new ListPickerGivenNonUniqueItems(elementsIdentifiers);
-    selectedElement = elementsIdentifiers[0];
+    firstSelectedElement = elementsIdentifiers[0];
+    secondSelectedElement = elementsIdentifiers[0];
 }
 
 /**
- * Sets the selected item in the list
+ * Sets first selected item in the list
  * @param {string} elementIdentifier
  * @return {void}
  */
-export function ListPickerSetSelectedElement(elementIdentifier)
+export function ListPickerSetFirstSelectedElement(elementIdentifier)
 {
     if (set === undefined)
         throw new ListPickerNotInitiliasedException();
     if (!set.has(elementIdentifier))
         throw new ElementIsNotInListPickerException(elementIdentifier, [...set]);
-    selectedElement = elementIdentifier;
+    firstSelectedElement = elementIdentifier;
 }
 
 /**
- * Returns the selected item of the list
+ * Sets second selected item in the list
+ * @param {string} elementIdentifier
+ * @return {void}
+ */
+export function ListPickerSetSecondSelectedElement(elementIdentifier)
+{
+    if (set === undefined)
+        throw new ListPickerNotInitiliasedException();
+    if (!set.has(elementIdentifier))
+        throw new ElementIsNotInListPickerException(elementIdentifier, [...set]);
+    secondSelectedElement = elementIdentifier;
+}
+
+/**
+ * Returns first selected item of the list
  * @return {string}
  */
-export function ListPickerGetSelectedElement()
+export function ListPickerGetFirstSelectedElement()
 {
-    return selectedElement;
+    return firstSelectedElement;
+}
+
+/**
+ * Returns second selected item of the list
+ * @return {string}
+ */
+export function ListPickerGetSecondSelectedElement()
+{
+    return secondSelectedElement;
 }
 
 /**
@@ -71,9 +98,11 @@ export function ListPickerGetNonSelectedElements()
 {
     if (set === undefined)
         return [];
-    set.delete(selectedElement);
+    set.delete(firstSelectedElement);
+    set.delete(secondSelectedElement);
     let result = [...set];
-    set.add(selectedElement);
+    set.add(firstSelectedElement);
+    set.add(secondSelectedElement);
     return result;
 }
 
