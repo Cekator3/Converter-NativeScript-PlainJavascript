@@ -62,7 +62,7 @@
                     <FormattedString>
                         <Span text="&#xf5cd;" class="fas logo" color="hsla(324, 100%, 26%, 1)"/>
                         <Span text="&#xa;&#xA;" class="spaceBetweenLogoAndText"/>
-                        <Span text="Масса" class="text"/>
+                        <Span text="Вес" class="text"/>
                     </FormattedString>
                 </Button>
             </flexbox-layout>

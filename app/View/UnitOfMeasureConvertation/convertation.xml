@@ -5,8 +5,12 @@
     </ActionBar>
 
     <StackLayout>
-        <FlexboxLayout class="unitsOfMeasure">
-        </FlexboxLayout>
+        <StackLayout class="unitsOfMeasure">
+            <FlexboxLayout class="unitOfMeasure convertFrom">
+            </FlexboxLayout>
+            <FlexboxLayout class="unitOfMeasure convertTo">
+            </FlexboxLayout>
+        </StackLayout>
 
         <Button ontap="swapUnits" />
 
