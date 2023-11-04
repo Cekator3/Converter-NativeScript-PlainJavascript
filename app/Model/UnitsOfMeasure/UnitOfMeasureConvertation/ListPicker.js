@@ -79,6 +79,7 @@ export function ListPickerSetSecondSelectedElement(elementIdentifier)
 
 /**
  * Returns first selected item of the ListPicker.
+ * If ListPicker is not initialised then returns undefined.
  * @return {string|undefined}
  */
 export function ListPickerGetFirstSelectedElement()
@@ -88,6 +89,7 @@ export function ListPickerGetFirstSelectedElement()
 
 /**
  * Returns second selected item of the ListPicker.
+ * If ListPicker is not initialised then returns undefined.
  * @return {string|undefined}
  */
 export function ListPickerGetSecondSelectedElement()

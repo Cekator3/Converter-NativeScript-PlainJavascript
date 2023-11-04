@@ -1,21 +1,36 @@
-import {Observable} from "@nativescript/core";
+import {Dialogs, Observable} from "@nativescript/core";
 import {Frame} from "@nativescript/core";
 import {
     userInputStorageAddSymbol, userInputStorageClearInput, userInputStorageRemoveLastSymbol,
     userInputStorageGenerateNumberFromInput,
-    userInputStorageGetRawInput
+    userInputStorageGetRawInput, StringGivenButCharExpectedException, GivenSymbolCannotBeContainedInNumberException
 } from "~/Model/UserInputStorage";
 import {
+    ElementIsNotInListPickerException,
     ListPickerGetFirstSelectedElement,
-    ListPickerGetSecondSelectedElement, ListPickerSetFirstSelectedElement, ListPickerSetSecondSelectedElement
+    ListPickerGetSecondSelectedElement,
+    ListPickerNotInitiliasedException,
+    ListPickerSetFirstSelectedElement,
+    ListPickerSetSecondSelectedElement
 } from "~/Model/UnitsOfMeasure/UnitOfMeasureConvertation/ListPicker";
 import {getUnitOfMeasureName} from "~/Model/UnitsOfMeasure/UnitsOfMeasureNames";
 import {
+    ConvertationNotImplementedException,
     ConvertValueToAnotherUnitOfMeasure
 } from "~/Model/UnitsOfMeasure/UnitOfMeasureConvertation/UnitOfMeasureConverter";
 
 const viewModel = new Observable();
 const CHOOSE_UNIT_OF_MEASURE_MODULE_PATH = '/View/UnitOfMeasureConvertation/ChooseUnitOfMeasure/ChooseUnitOfMeasure';
+
+function DisplayErrorMessage(message)
+{
+    Dialogs.alert({
+        title: 'Ошибка',
+        message: message,
+        okButtonText: 'Ок',
+        cancelable: true
+    });
+}
 
 function updateUnitsOfMeasureValues()
 {
@@ -24,9 +39,19 @@ function updateUnitsOfMeasureValues()
     let userRawInput = userInputStorageGetRawInput()
                             .replace('.', ',');
     let currentValue = userInputStorageGenerateNumberFromInput();
-    let targetValue = ConvertValueToAnotherUnitOfMeasure(currentValue,
-                                                                currentUnitOfMeasureId,
-                                                                targetUnitOfMeasureId);
+    let targetValue = 0;
+    try
+    {
+        targetValue = ConvertValueToAnotherUnitOfMeasure(currentValue,
+                                                                    currentUnitOfMeasureId,
+                                                                    targetUnitOfMeasureId);
+    }
+    catch (e)
+    {
+        if (e instanceof ConvertationNotImplementedException)
+            DisplayErrorMessage('Извините. Пока что данная конвертация не поддерживается приложением.');
+        return;
+    }
     viewModel.set('currentUnitOfMeasureValue', userRawInput);
     viewModel.set('targetUnitOfMeasureValue', targetValue);
 }
@@ -42,7 +67,17 @@ function updateTypesOfUnitsOfMeasure()
 function addSymbolToUserInput(args)
 {
     let number = args.object.text;
-    userInputStorageAddSymbol(number);
+    try
+    {
+        userInputStorageAddSymbol(number);
+    }
+    catch (e)
+    {
+        if (e instanceof StringGivenButCharExpectedException)
+            DisplayErrorMessage('Извините, программа принимает ввод только по одной цифре за раз.');
+        if (e instanceof GivenSymbolCannotBeContainedInNumberException)
+            DisplayErrorMessage('Извините, символ ' + e.givenSymbol + ' не может содержаться в числе.');
+    }
     updateUnitsOfMeasureValues();
 }
 
@@ -62,8 +97,18 @@ function swapUnitsOfMeasureTypes()
 {
     let currentUnitOfMeasureId = ListPickerGetFirstSelectedElement();
     let targetUnitOfMeasureId = ListPickerGetSecondSelectedElement();
-    ListPickerSetFirstSelectedElement(targetUnitOfMeasureId);
-    ListPickerSetSecondSelectedElement(currentUnitOfMeasureId);
+    try
+    {
+        ListPickerSetFirstSelectedElement(targetUnitOfMeasureId);
+        ListPickerSetSecondSelectedElement(currentUnitOfMeasureId);
+    }
+    catch (e)
+    {
+        if (e instanceof ListPickerNotInitiliasedException)
+            gotoHomePage();
+        if (e instanceof ElementIsNotInListPickerException)
+            DisplayErrorMessage('Извините. Единицы измерения, которую вы хотите поменять местами, в приложении ещё нет.');
+    }
     updateTypesOfUnitsOfMeasure();
     updateUnitsOfMeasureValues();
 }

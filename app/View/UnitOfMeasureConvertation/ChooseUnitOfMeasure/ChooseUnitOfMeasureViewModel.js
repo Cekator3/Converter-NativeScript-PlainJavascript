@@ -1,20 +1,49 @@
-import {Observable} from "@nativescript/core";
+import {Dialogs, Observable} from "@nativescript/core";
 import {Frame} from "@nativescript/core";
 import {getUnitOfMeasureName} from "~/Model/UnitsOfMeasure/UnitsOfMeasureNames";
 import {
-    ListPickerGetAllElements,
+    ElementIsNotInListPickerException,
+    ListPickerGetAllElements, ListPickerNotInitiliasedException,
     ListPickerSetFirstSelectedElement, ListPickerSetSecondSelectedElement
 } from "~/Model/UnitsOfMeasure/UnitOfMeasureConvertation/ListPicker";
 
 const viewModel = new Observable();
 
+function gotoHomePage()
+{
+    Frame.topmost().navigate({
+        moduleName: '/View/home',
+        clearHistory: true
+    });
+}
+
+function DisplayErrorMessage(message)
+{
+    Dialogs.alert({
+        title: 'Ошибка',
+        message: message,
+        okButtonText: 'Ок',
+        cancelable: true
+    });
+}
+
 function chooseUnitOfMeasure(args)
 {
     let selectedUnitOfMeasureId = args.object.items[args.index].unitOfMeasureIdentifier;
-    if (viewModel.get('isChangingCurrentUnitOfMeasure'))
-        ListPickerSetFirstSelectedElement(selectedUnitOfMeasureId);
-    else
-        ListPickerSetSecondSelectedElement(selectedUnitOfMeasureId);
+    try
+    {
+        if (viewModel.get('isChangingCurrentUnitOfMeasure'))
+            ListPickerSetFirstSelectedElement(selectedUnitOfMeasureId);
+        else
+            ListPickerSetSecondSelectedElement(selectedUnitOfMeasureId);
+    }
+    catch (e)
+    {
+        if (e instanceof ListPickerNotInitiliasedException)
+            gotoHomePage();
+        if (e instanceof ElementIsNotInListPickerException)
+            DisplayErrorMessage('Извините. Единицы измерения, которую вы выбрали, в приложении нет.');
+    }
     Frame.goBack();
 }
 
