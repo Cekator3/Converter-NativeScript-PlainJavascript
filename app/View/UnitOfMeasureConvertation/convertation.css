@@ -13,8 +13,8 @@ Page
 
 .unitOfMeasure
 {
-    justify-content: space-between;
-    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
     height: 48%;
     padding: 0 12;
     border-radius: 15% 15% 15% 15%;
@@ -38,6 +38,7 @@ Page
 
 .unitOfMeasure .Value
 {
+    align-self: flex-end;
     font-size: 25;
 }
 

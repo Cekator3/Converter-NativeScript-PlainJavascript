@@ -7,7 +7,7 @@
         <FlexboxLayout class="unitsOfMeasureConvertionTable">
             <FlexboxLayout class="unitOfMeasure first" tap="{{ chooseCurrentUnitOfMeasure }}">
                 <Label class="Type" text="{{ currentUnitOfMeasureTypeName }}"/>
-                <Label class="Value" text="{{ currentUnitOfMeasureValue }}"/>
+                <Label class="Value" text="{{ currentUnitOfMeasureValue }}" textWrap="true"/>
             </FlexboxLayout>
             <FlexboxLayout class="unitOfMeasure second" tap="{{ chooseTargetUnitOfMeasure }}">
                 <Label class="Type" text="{{ targetUnitOfMeasureTypeName }}"/>
