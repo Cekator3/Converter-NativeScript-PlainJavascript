@@ -10,7 +10,6 @@ import {
 } from "~/Model/UnitsOfMeasure/UnitsOfMeasureGroups";
 import {ListPickerSetElements} from "~/Model/UnitsOfMeasure/UnitOfMeasureConvertation/ListPicker";
 
-const viewModel = new Observable();
 const CONVERTATION_PAGE_PATH = '/View/UnitOfMeasureConvertation/convertation';
 
 function navigateToConvertationPage(convertationTitle)
@@ -81,7 +80,7 @@ function openConvertationForWeightUnitsOfMeasure()
 
 export function createViewModel()
 {
-    //TODO items from listpicker
+    let viewModel = new Observable();
     viewModel.openConvertationForLengthUnitsOfMeasure = openConvertationForLengthUnitsOfMeasure;
     viewModel.openConvertationForAreaUnitsOfMeasure = openConvertationForAreaUnitsOfMeasure;
     viewModel.openConvertationForVolumeUnitsOfMeasure = openConvertationForVolumeUnitsOfMeasure;

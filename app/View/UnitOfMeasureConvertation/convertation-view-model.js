@@ -21,35 +21,38 @@ function updateUnitsOfMeasureValues()
 {
     let currentUnitOfMeasureId = ListPickerGetFirstSelectedElement();
     let targetUnitOfMeasureId = ListPickerGetSecondSelectedElement();
+    let userRawInput = userInputStorageGetRawInput()
+                            .replace('.', ',');
     let currentValue = userInputStorageGenerateNumberFromInput();
-    let targetValue = ConvertValueToAnotherUnitOfMeasure(currentValue, currentUnitOfMeasureId, targetUnitOfMeasureId);
-    viewModel.set('currentUnitOfMeasureValue', userInputStorageGetRawInput().replace('.', ','));
+    let targetValue = ConvertValueToAnotherUnitOfMeasure(currentValue,
+                                                                currentUnitOfMeasureId,
+                                                                targetUnitOfMeasureId);
+    viewModel.set('currentUnitOfMeasureValue', userRawInput);
     viewModel.set('targetUnitOfMeasureValue', targetValue);
 }
 
-function setUnitsOfMeasureConvertionTypes()
+function updateTypesOfUnitsOfMeasure()
 {
-    let id = '';
-    id = ListPickerGetFirstSelectedElement();
+    let id = ListPickerGetFirstSelectedElement();
     viewModel.set('currentUnitOfMeasureTypeName', getUnitOfMeasureName(id));
     id = ListPickerGetSecondSelectedElement();
     viewModel.set('targetUnitOfMeasureTypeName', getUnitOfMeasureName(id));
 }
 
-function inputNumberPart(args)
+function addSymbolToUserInput(args)
 {
     let number = args.object.text;
     userInputStorageAddSymbol(number);
     updateUnitsOfMeasureValues();
 }
 
-function clearInput()
+function clearUserInput()
 {
     userInputStorageClearInput();
     updateUnitsOfMeasureValues();
 }
 
-function deleteLastNumberPart()
+function deleteLastInputOfUser()
 {
     userInputStorageRemoveLastSymbol();
     updateUnitsOfMeasureValues();
@@ -75,11 +78,12 @@ export function createViewModel(context)
 {
     viewModel.title = context.convertationTitle;
     viewModel.goBack = Frame.goBack;
-    viewModel.inputNumberPart = inputNumberPart;
-    viewModel.clearInput = clearInput;
-    viewModel.deleteLastNumberPart = deleteLastNumberPart;
+    viewModel.inputNumberPart = addSymbolToUserInput;
+    viewModel.clearInput = clearUserInput;
+    viewModel.deleteLastNumberPart = deleteLastInputOfUser;
     viewModel.chooseCurrentUnitOfMeasure = chooseCurrentUnitOfMeasure;
     viewModel.chooseTargetUnitOfMeasure = chooseTargetUnitOfMeasure;
     updateUnitsOfMeasureValues();
+    updateTypesOfUnitsOfMeasure();
     return viewModel;
 }
