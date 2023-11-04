@@ -11,7 +11,7 @@
             </FlexboxLayout>
             <FlexboxLayout class="unitOfMeasure second" tap="{{ chooseTargetUnitOfMeasure }}">
                 <Label class="Type" text="{{ targetUnitOfMeasureTypeName }}"/>
-                <Label class="Value" text="{{ targetUnitOfMeasureValue }}"/>
+                <Label class="Value" text="{{ targetUnitOfMeasureValue }}" textWrap="true"/>
             </FlexboxLayout>
         </FlexboxLayout>
 

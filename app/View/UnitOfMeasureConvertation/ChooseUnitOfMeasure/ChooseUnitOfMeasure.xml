@@ -5,7 +5,7 @@
     <FlexboxLayout>
     <ListView items="{{ unitsOfMeasure }}" itemTap="{{ chooseUnitOfMeasure }}">
     <ListView.itemTemplate>
-        <Label text="{{ unitOfMeasureName }}" id="{{ unitOfMeasureIdentifier }}"/>
+        <Label text="{{ unitOfMeasureName }}" class="unitOfMeasure" id="{{ unitOfMeasureIdentifier }}"/>
     </ListView.itemTemplate>
     </ListView>
     </FlexboxLayout>
