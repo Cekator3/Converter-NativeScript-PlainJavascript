@@ -29,8 +29,9 @@ export class ElementIsNotInListPickerException extends Error
 }
 
 /**
- * Sets the contents of the list.
+ * Sets the contents of the ListPicker.
  * @param {string[]} elementsIdentifiers Must be unique values
+ * @throws ListPickerGivenNonUniqueItems
  * @return {void}
  */
 export function ListPickerSetElements(elementsIdentifiers)
@@ -45,8 +46,10 @@ export function ListPickerSetElements(elementsIdentifiers)
 }
 
 /**
- * Sets first selected item in the list
+ * Sets first selected item of the ListPicker.
  * @param {string} elementIdentifier
+ * @throws ListPickerNotInitiliasedException
+ * @throws ElementIsNotInListPickerException
  * @return {void}
  */
 export function ListPickerSetFirstSelectedElement(elementIdentifier)
@@ -59,8 +62,10 @@ export function ListPickerSetFirstSelectedElement(elementIdentifier)
 }
 
 /**
- * Sets second selected item in the list
+ * Sets second selected item of the ListPicker.
  * @param {string} elementIdentifier
+ * @throws ListPickerNotInitiliasedException
+ * @throws ElementIsNotInListPickerException
  * @return {void}
  */
 export function ListPickerSetSecondSelectedElement(elementIdentifier)
@@ -73,8 +78,8 @@ export function ListPickerSetSecondSelectedElement(elementIdentifier)
 }
 
 /**
- * Returns first selected item of the list
- * @return {string}
+ * Returns first selected item of the ListPicker.
+ * @return {string|undefined}
  */
 export function ListPickerGetFirstSelectedElement()
 {
@@ -82,8 +87,8 @@ export function ListPickerGetFirstSelectedElement()
 }
 
 /**
- * Returns second selected item of the list
- * @return {string}
+ * Returns second selected item of the ListPicker.
+ * @return {string|undefined}
  */
 export function ListPickerGetSecondSelectedElement()
 {
@@ -91,7 +96,7 @@ export function ListPickerGetSecondSelectedElement()
 }
 
 /**
- * Returns all non-selected items of the list
+ * Returns all non-selected items of the ListPicker.
  * @return {string[]}
  */
 export function ListPickerGetNonSelectedElements()
@@ -107,7 +112,7 @@ export function ListPickerGetNonSelectedElements()
 }
 
 /**
- * Returns all items of the list
+ * Returns all items of the ListPicker
  * @return {string[]}
  */
 export function ListPickerGetAllElements()

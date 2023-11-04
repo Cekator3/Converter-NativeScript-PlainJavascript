@@ -77,22 +77,9 @@ import
 let ruNames = new Map();
 
 /**
- * Returns array of names of units of measure by their identifiers.
- * @param {string[]} unitsOfMeasureIdentifiers
- * @return {string[]}
- */
-export function getUnitsOfMeasureNames(unitsOfMeasureIdentifiers)
-{
-    let result = [];
-    for (let id of unitsOfMeasureIdentifiers)
-        result.push(getUnitOfMeasureName(id));
-    return result;
-}
-
-/**
  * Returns name of unit of measure by his identifier.
  * @param {string} unitOfMeasureIdentifier
- * @return {string}
+ * @return {string|undefined}
  */
 export function getUnitOfMeasureName(unitOfMeasureIdentifier)
 {

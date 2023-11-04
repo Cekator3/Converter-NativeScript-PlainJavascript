@@ -7,18 +7,18 @@ import {
     getIdentifiersOfPressureUnitsOfMeasure,
     getIdentifiersOfStorageUnitsOfMeasure, getIdentifiersOfTimeUnitsOfMeasure,
     getIdentifiersOfVolumeUnitsOfMeasure, getIdentifiersOfWeightUnitsOfMeasure
-} from "~/Model/UnitsOfMeasure/IdentifiersOfUnitsOfMeasureFromCertainGroup";
+} from "~/Model/UnitsOfMeasure/UnitsOfMeasureGroups";
 import {ListPickerSetElements} from "~/Model/UnitsOfMeasure/UnitOfMeasureConvertation/ListPicker";
 
 const viewModel = new Observable();
 const CONVERTATION_PAGE_PATH = '/View/UnitOfMeasureConvertation/convertation';
 
-function navigateToConvertationPage(conversationTitle)
+function navigateToConvertationPage(convertationTitle)
 {
     Frame.topmost().navigate({
         moduleName: CONVERTATION_PAGE_PATH,
         context: {
-            conversationTitle: conversationTitle
+            convertationTitle: convertationTitle
         }
     })
 }

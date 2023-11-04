@@ -82,8 +82,8 @@ let unitsOfMeasureConvertionMultipliers = new Map();
  * @returns {number|undefined}
  */
 export
-function getMultiplierForConvertingValueFromOneUnitOfMeasureToAnother(currentUnitOfMeasureId,
-                                                                      targetUnitOfMeasureId)
+function getMultiplierForUnitOfMeasureConvertion(currentUnitOfMeasureId,
+                                                 targetUnitOfMeasureId)
 {
     let convertionName = currentUnitOfMeasureId + '/' + targetUnitOfMeasureId;
     return unitsOfMeasureConvertionMultipliers.get(convertionName);

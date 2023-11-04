@@ -5,13 +5,13 @@
 
     <StackLayout>
         <FlexboxLayout class="unitsOfMeasureConvertionTable">
-            <FlexboxLayout class="unitOfMeasure first">
-                <Label class="Type" text="Тип" />
-                <Label class="Value" id="convertFrom" text="999"/>
+            <FlexboxLayout class="unitOfMeasure first" tap="{{ chooseCurrentUnitOfMeasure }}">
+                <Label class="Type" text="{{ currentUnitOfMeasureTypeName }}"/>
+                <Label class="Value" text="{{ currentUnitOfMeasureValue }}"/>
             </FlexboxLayout>
-            <FlexboxLayout class="unitOfMeasure second">
-                <Label class="Type" text="Тип" />
-                <Label class="Value" id="convertTo" text="999"/>
+            <FlexboxLayout class="unitOfMeasure second" tap="{{ chooseTargetUnitOfMeasure }}">
+                <Label class="Type" text="{{ targetUnitOfMeasureTypeName }}"/>
+                <Label class="Value" text="{{ targetUnitOfMeasureValue }}"/>
             </FlexboxLayout>
         </FlexboxLayout>
 

@@ -1,43 +1,45 @@
 /**
- * @file Subsystem for generating number from inputs: digits, decimal delimiters, etc...
+ * @file Subsystem for storing number inputed by user
  */
 
-let inputsOfNumberGenerator = '';
+let rawInput = '';
 
 /**
- * Returns entered to generator elements
+ * Returns user's input from which number will be generated.
  * @return {string}
  */
-export function getRawInput()
+export function userInputStorageGetRawInput()
 {
-    return inputsOfNumberGenerator;
+    return rawInput;
 }
 
 /**
- * Returns number generated from entered to generator elements
+ * Generates number from user's input.
  * @return {number}
  */
-export function generateNumberFromInputs()
+export function userInputStorageGenerateNumberFromInput()
 {
-    return parseFloat(inputsOfNumberGenerator);
+    if (rawInput === '')
+        return 0.0;
+    return parseFloat(rawInput);
 }
 
 /**
- * Removes all elements of entered number
+ * Clears user's input from storage.
  * @return {void}
  */
-export function clearAllInputsFromNumberGenerator()
+export function userInputStorageClearInput()
 {
-    inputsOfNumberGenerator = '';
+     rawInput = '';
 }
 
 /**
- * Removes last element of entered number
+ * Removes last symbol entered to storage.
  * @return {void}
  */
-export function deleteLastInputFromNumberGenerator()
+export function userInputStorageRemoveLastSymbol()
 {
-    inputsOfNumberGenerator = inputsOfNumberGenerator.slice(0, -1);
+     rawInput =  rawInput.slice(0, -1);
 }
 
 function isDecimalDelimiter(chr)
@@ -75,24 +77,24 @@ function countExponents(str)
 
 function AppendExponentToInputsOfNumberGenerator()
 {
-    if (inputsOfNumberGenerator === '')
+    if (rawInput === '')
         return;
-    if (countExponents(inputsOfNumberGenerator) === 0)
-        inputsOfNumberGenerator += 'e';
+    if (countExponents(rawInput) === 0)
+         rawInput += 'e';
 }
 
 function AppendDecimalDelimiterToInputsOfNumberGenerator()
 {
-    if (inputsOfNumberGenerator === '')
+    if (rawInput === '')
         return;
-    if (countDecimalDelimiters(inputsOfNumberGenerator) === 0)
-        inputsOfNumberGenerator += '.';
+    if (countDecimalDelimiters(rawInput) === 0)
+         rawInput += '.';
 }
 
 function AppendDigitToInputsOfNumberGenerator(chr)
 {
-    if (inputsOfNumberGenerator !== '0')
-        inputsOfNumberGenerator += chr;
+    if ( rawInput !== '0')
+         rawInput += chr;
 }
 
 export class GivenSymbolCannotBeContainedInNumberException extends Error
@@ -108,11 +110,13 @@ export class GivenSymbolCannotBeContainedInNumberException extends Error
 export class StringGivenButCharExpectedException extends Error { }
 
 /**
- * Adds new element to number
+ * Adds new element to user's input storage.
  * @param {string} symbol
+ * @throws StringGivenButCharExpectedException
+ * @throws GivenSymbolCannotBeContainedInNumberException
  * @return {void}
  */
-export function addSymbolToNumberGeneratorFromInput(symbol)
+export function userInputStorageAddSymbol(symbol)
 {
     if (symbol === '')
         return;
