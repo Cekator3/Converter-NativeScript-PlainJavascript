@@ -84,10 +84,18 @@ function chooseCurrentUnitOfMeasure()
     });
 }
 
+function gotoHomePage()
+{
+   Frame.topmost().navigate({
+       moduleName: '/View/home',
+       clearHistory: true
+   });
+}
+
 export function createViewModel(context)
 {
     viewModel.title = context.convertationTitle;
-    viewModel.goBack = Frame.goBack;
+    viewModel.gotoHomePage = gotoHomePage;
     viewModel.addSymbolToUserInput = addSymbolToUserInput;
     viewModel.clearUserInput = clearUserInput;
     viewModel.deleteLastInputOfUser = deleteLastInputOfUser;

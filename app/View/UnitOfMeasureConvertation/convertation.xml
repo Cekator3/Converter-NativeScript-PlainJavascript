@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
     <ActionBar title="{{ title }}">
-        <NavigationButton android.systemIcon="ic_menu_back" tap="{{ goBack }}"/>
+        <NavigationButton android.systemIcon="ic_menu_back" tap="{{ gotoHomePage }}"/>
     </ActionBar>
 
     <StackLayout>
