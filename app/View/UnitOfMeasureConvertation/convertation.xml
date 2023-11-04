@@ -15,7 +15,7 @@
             </FlexboxLayout>
         </FlexboxLayout>
 
-        <Button ontap="{{ swapUnits }}" text="Поменять местами" class="swapUnits" />
+        <Button ontap="{{ swapUnitsOfMeasureTypes }}" text="Поменять местами" class="swapUnits" />
 
         <GridLayout class="numpad" columns="*, *, *, *" rows="*, *, *, *">
             <button text="7" col="0" row="0" tap="{{ addSymbolToUserInput }}"/>

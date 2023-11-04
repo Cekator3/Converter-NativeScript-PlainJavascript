@@ -7,7 +7,7 @@ import {
 } from "~/Model/UserInputStorage";
 import {
     ListPickerGetFirstSelectedElement,
-    ListPickerGetSecondSelectedElement, ListPickerSetSecondSelectedElement
+    ListPickerGetSecondSelectedElement, ListPickerSetFirstSelectedElement, ListPickerSetSecondSelectedElement
 } from "~/Model/UnitsOfMeasure/UnitOfMeasureConvertation/ListPicker";
 import {getUnitOfMeasureName} from "~/Model/UnitsOfMeasure/UnitsOfMeasureNames";
 import {
@@ -58,6 +58,16 @@ function deleteLastInputOfUser()
     updateUnitsOfMeasureValues();
 }
 
+function swapUnitsOfMeasureTypes()
+{
+    let currentUnitOfMeasureId = ListPickerGetFirstSelectedElement();
+    let targetUnitOfMeasureId = ListPickerGetSecondSelectedElement();
+    ListPickerSetFirstSelectedElement(targetUnitOfMeasureId);
+    ListPickerSetSecondSelectedElement(currentUnitOfMeasureId);
+    updateTypesOfUnitsOfMeasure();
+    updateUnitsOfMeasureValues();
+}
+
 function chooseTargetUnitOfMeasure()
 {
     Frame.topmost().navigate({
@@ -81,6 +91,7 @@ export function createViewModel(context)
     viewModel.addSymbolToUserInput = addSymbolToUserInput;
     viewModel.clearUserInput = clearUserInput;
     viewModel.deleteLastInputOfUser = deleteLastInputOfUser;
+    viewModel.swapUnitsOfMeasureTypes = swapUnitsOfMeasureTypes;
     viewModel.chooseCurrentUnitOfMeasure = chooseCurrentUnitOfMeasure;
     viewModel.chooseTargetUnitOfMeasure = chooseTargetUnitOfMeasure;
     updateUnitsOfMeasureValues();
