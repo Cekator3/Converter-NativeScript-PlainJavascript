@@ -78,9 +78,9 @@ export function createViewModel(context)
 {
     viewModel.title = context.convertationTitle;
     viewModel.goBack = Frame.goBack;
-    viewModel.inputNumberPart = addSymbolToUserInput;
-    viewModel.clearInput = clearUserInput;
-    viewModel.deleteLastNumberPart = deleteLastInputOfUser;
+    viewModel.addSymbolToUserInput = addSymbolToUserInput;
+    viewModel.clearUserInput = clearUserInput;
+    viewModel.deleteLastInputOfUser = deleteLastInputOfUser;
     viewModel.chooseCurrentUnitOfMeasure = chooseCurrentUnitOfMeasure;
     viewModel.chooseTargetUnitOfMeasure = chooseTargetUnitOfMeasure;
     updateUnitsOfMeasureValues();
